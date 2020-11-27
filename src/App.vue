@@ -1,31 +1,25 @@
 <template>
   <div id="app">
     <AppLayout>
-      <template #header>testando bicha</template>
-
-      <AppButton>
-        Oie2
-        <IconStar/>
-      </AppButton>
-
-      <template #footer><Footer/></template>
+      <AppUserList>
+        <template #title> List of users:</template>
+        <template #loading ><TheLoading/></template>
+      </AppUserList>
     </AppLayout>
   </div>
 </template>
 
 <script>
 import AppLayout from '@/components/AppLayout.vue';
-import AppButton from '@/components/AppButton.vue';
-import IconStar from '@/components/IconStar.vue';
-import Footer from '@/components/Footer.vue';
+import AppUserList from '@/components/AppUserList.vue';
+import TheLoading from '@/components/TheLoading.vue';
 
 export default {
   name: 'App',
   components: {
     AppLayout,
-    AppButton,
-    IconStar,
-    Footer,
+    AppUserList,
+    TheLoading,
   },
 };
 </script>

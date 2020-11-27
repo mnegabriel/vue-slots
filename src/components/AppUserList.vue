@@ -1,20 +1,25 @@
 <template>
   <section>
-    <ul class="userlist">
-      <li v-for="item in data.results" :key="item.email">
-        <div>
-          <img
-            width="48"
-            height="48"
-            :src="item.picture.large"
-            :alt="item.name.first + ' ' + item.name.last"
-          />
+    <slot name='title'>Users</slot>
+    <ul class="userlist" v-if="state === 'loaded'">
+      <transition-group name="list">
+        <li v-for="item in data.results" :key="item.email">
           <div>
-            <div>{{ item.name.first }}</div>
+            <img
+              width="48"
+              height="48"
+              :src="item.picture.large"
+              :alt="item.name.first + ' ' + item.name.last"
+            />
+            <div>
+              <div>{{ item.name.first }}</div>
+            </div>
           </div>
-        </div>
-      </li>
+        </li>
+      </transition-group>
     </ul>
+    <slot v-else-if='state==="failed"' name='error'>{{error}}</slot>
+    <slot v-else name='loading'>Loading...</slot>
   </section>
 </template>
 
@@ -59,8 +64,21 @@ export default {
 </script>
 
 <style>
+section {
+  padding: 20px;
+}
+
+.list-enter-active, .list-leave-active {
+  transition: all 1s;
+}
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
 .userlist {
   margin: 10px;
+  list-style: none;
 }
 .userlist img {
   border-radius: 50%;
