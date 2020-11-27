@@ -33,6 +33,10 @@ footer {
   width: 100%;
   min-height: 50px;
   background-color:var(--col-main);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
 }
 
 main {
