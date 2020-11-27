@@ -5,6 +5,7 @@
         <template #title> List of users:</template>
         <template #loading ><TheLoading/></template>
       </AppUserList>
+      <template #footer><TheFooter/></template>
     </AppLayout>
   </div>
 </template>
@@ -13,6 +14,7 @@
 import AppLayout from '@/components/AppLayout.vue';
 import AppUserList from '@/components/AppUserList.vue';
 import TheLoading from '@/components/TheLoading.vue';
+import TheFooter from '@/components/TheFooter.vue';
 
 export default {
   name: 'App',
@@ -20,6 +22,7 @@ export default {
     AppLayout,
     AppUserList,
     TheLoading,
+    TheFooter,
   },
 };
 </script>
