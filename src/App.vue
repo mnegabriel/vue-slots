@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <AppLayout>
-      <AppUserList>
+    <AppLayout >
+      <AppUserList :secondrow="user => user.email">
         <template #title> List of users:</template>
         <template #loading ><TheLoading/></template>
       </AppUserList>

@@ -3,23 +3,25 @@
     <slot name='title'>Users</slot>
     <ul class="userlist" v-if="state === 'loaded'">
       <transition-group name="list">
-        <li v-for="item in data.results" :key="item.email">
+        <li v-for="user in data.results" :key="user.email">
           <div>
             <img
               width="48"
               height="48"
-              :src="item.picture.large"
-              :alt="item.name.first + ' ' + item.name.last"
+              :src="user.picture.large"
+              :alt="user.name.first + ' ' + user.name.last"
             />
             <div>
-              <div>{{ item.name.first }}</div>
+              <div>{{ user.name.first }}</div>
+              <slot></slot>
+              {{ secondrow(user) }}
             </div>
           </div>
         </li>
       </transition-group>
     </ul>
     <slot v-else-if='state==="failed"' name='error'>{{error}}</slot>
-    <slot v-else name='loading'>Loading...</slot>
+    <slot v-else-if="state==='loading'" name='loading'>Loading...</slot>
   </section>
 </template>
 
@@ -38,6 +40,12 @@ export default {
       error: undefined,
       states,
     };
+  },
+  props: {
+    secondrow: {
+      type: Function,
+      default: () => {},
+    },
   },
   mounted() {
     this.load();
