@@ -23,6 +23,7 @@ export default {
 .card{
   border-radius: 5px;
   box-shadow: 1px 1px 10px 0 #00000016;
+  overflow: hidden;
 }
 
 .image img {
