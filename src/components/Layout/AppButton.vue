@@ -6,10 +6,3 @@
 export default {
   name: 'AppButton',
 };
-</script>
-
-<style scoped>
-/* button {
-  display: block;
-} */
-</style>

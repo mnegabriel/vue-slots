@@ -1,25 +1,30 @@
 <template>
   <section>
     <slot name='title'>Users</slot>
-    <ul class="userlist" v-if="state === 'loaded'">
-      <transition-group name="list">
-        <li v-for="user in data.results" :key="user.email">
-          <div>
-            <img
-              width="48"
-              height="48"
-              :src="user.picture.large"
-              :alt="user.name.first + ' ' + user.name.last"
-            />
-            <div>
-              <div>{{ user.name.first }}</div>
-              <slot></slot>
-              {{ secondrow(user) }}
-            </div>
-          </div>
-        </li>
-      </transition-group>
-    </ul>
+
+    <slot name='userlist' :userlist="data.results" v-if="state === 'loaded'">
+      <ul class="userlist">
+          <li v-for="user in data.results" :key="user.email">
+
+            <slot name='listitem' :user='user'>
+              <div>
+                <img
+                  width="48"
+                  height="48"
+                  :src="user.picture.large"
+                  :alt="user.name.first + ' ' + user.name.last"
+                />
+                <div>
+                  <div>{{ user.name.first }}</div>
+                  <slot name="secondrow" :user='user'></slot>
+                </div>
+              </div>
+            </slot>
+
+          </li>
+      </ul>
+    </slot>
+
     <slot v-else-if='state==="failed"' name='error'>{{error}}</slot>
     <slot v-else-if="state==='loading'" name='loading'>Loading...</slot>
   </section>
@@ -71,7 +76,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 section {
   padding: 20px;
 }

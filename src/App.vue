@@ -1,28 +1,35 @@
 <template>
   <div id="app">
     <AppLayout >
-      <AppUserList :secondrow="user => user.email">
-        <template #title> List of users:</template>
+
+      <AppUserList>
+        <template #userlist="{userlist}">
+          <AppUserCardDeck :userlist="userlist"/>
+        </template>
         <template #loading ><TheLoading/></template>
       </AppUserList>
+
       <template #footer><TheFooter/></template>
     </AppLayout>
   </div>
 </template>
 
 <script>
-import AppLayout from '@/components/AppLayout.vue';
-import AppUserList from '@/components/AppUserList.vue';
-import TheLoading from '@/components/TheLoading.vue';
-import TheFooter from '@/components/TheFooter.vue';
+import AppLayout from '@/components/Layout/AppLayout.vue';
+import TheLoading from '@/components/Layout/TheLoading.vue';
+import TheFooter from '@/components/Layout/TheFooter.vue';
+
+import AppUserList from '@/components/Users/AppUserList.vue';
+import AppUserCardDeck from '@/components/Users/AppUserCardDeck.vue';
 
 export default {
   name: 'App',
   components: {
     AppLayout,
-    AppUserList,
     TheLoading,
     TheFooter,
+    AppUserList,
+    AppUserCardDeck,
   },
 };
 </script>
